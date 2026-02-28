@@ -18,7 +18,10 @@ public class Baraja {
 		for( String color : colores ) {
 			for( int i = 0; i <= 9; i++ ) {
 				cartas.add(new Carta(color, i));
-				cartas.add(new Carta(color, i));
+
+				if (i != 0) {
+				    cartas.add(new Carta(color, i));
+				}
 			}
 		}
 	}
