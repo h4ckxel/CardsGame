@@ -15,14 +15,23 @@ public class Baraja {
 	private void crearBaraja() {
 		String[] colores = {"rojo", "azul", "verde", "amarillo"};
 		
-		for( String color : colores ) {
-			for( int i = 0; i <= 9; i++ ) {
+		for(String color : colores) {
+			cartas.add(new Carta(color, 0));
+			
+			for(int i = 1; i <= 9; i++) {
 				cartas.add(new Carta(color, i));
-
-				if (i != 0) {
-				    cartas.add(new Carta(color, i));
-				}
 			}
+			
+			for (int j = 0; j < 2; j++){
+				cartas.add(new Carta(color, Carta.Tipo.SALTO));
+				cartas.add(new Carta(color, Carta.Tipo.REVERSA));
+				cartas.add(new Carta(color, Carta.Tipo.ROBA2));
+			}
+		}
+		
+		for (int i = 0; i < 4; i++){
+			cartas.add(new Carta("negro", Carta.Tipo.COMODIN));
+			cartas.add(new Carta("negro", Carta.Tipo.ROBA4));
 		}
 	}
 	
@@ -35,7 +44,7 @@ public class Baraja {
 		return cartas.remove(0);
 	}
 	
-	public int cartasRestantes() {
+	/*public int cartasRestantes() {
 		return cartas.size();
-	}
+	}*/
 }
