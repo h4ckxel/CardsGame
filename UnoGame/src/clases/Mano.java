@@ -14,8 +14,14 @@ public class Mano {
 	}
 	
 	public Carta jugarCarta( int indice ) {
-		if ( indice < 0 || indice >= cartas.size() ) return null;
-		return cartas.remove(indice);
+		if ( indice >= 0 && indice < cartas.size()) {
+			return cartas.remove(indice);
+		}
+		return null;
+		
+		//Version 1
+		//if ( indice < 0 || indice >= cartas.size() ) return null;
+		//return cartas.remove(indice);
 	}
 	
 	public int size() {
@@ -24,6 +30,10 @@ public class Mano {
 	
 	public boolean estaVacia() {
 		return cartas.isEmpty();
+	}
+	
+	public Carta getCarta( int indice ) {
+		return cartas.get( indice );
 	}
 	
 	public void mostrarMano() {
