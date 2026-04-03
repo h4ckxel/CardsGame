@@ -6,5 +6,4 @@ public class main {
 		Juego juego = new Juego();
 		juego.iniciar();
 	}
-
 }
