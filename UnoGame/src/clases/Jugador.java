@@ -78,13 +78,23 @@ public class Jugador {
                     + "  No tienes jugada válida. Robas una carta automáticamente." + Consola.RESET);
             Consola.animarRobando(nombre, 1);
             robarCarta(baraja);
-            return null;
+
+            int idx = mano.primerIndiceValido(cartaMesa);
+            if (idx == -1) {
+                System.out.println(Consola.AMARILLO + "  La carta robada tampoco es válida. Pierdes turno." + Consola.RESET);
+                return null;
+            }
+
+            System.out.println(Consola.VERDE + "  La carta robada es jugable!" + Consola.RESET);
+            mano.mostrarMano();
+
+            return elegirYJugarCarta(cartaMesa, scanner); // <- extrae la carta y la retorna
         }
 
+        int opcion = 0;
         while (true) {
             System.out.print(Consola.BLANCO + Consola.NEGRITA
                     + "  Elige carta (índice) o -1 para robar: " + Consola.RESET);
-            int opcion;
 
             try {
                 opcion = Integer.parseInt(scanner.nextLine().trim());
@@ -97,42 +107,65 @@ public class Jugador {
                 Consola.animarRobando(nombre, 1);
                 robarCarta(baraja);
                 System.out.println(Consola.CIAN + "  Robaste una carta." + Consola.RESET);
+
                 int idx = mano.primerIndiceValido(cartaMesa);
                 if (idx == -1) {
                     System.out.println(Consola.AMARILLO + "  La carta robada no es válida. Pierdes turno." + Consola.RESET);
                     return null;
                 }
+
                 System.out.println(Consola.VERDE + "  La carta robada es jugable!" + Consola.RESET);
                 mano.mostrarMano();
-                System.out.print(Consola.BLANCO + Consola.NEGRITA
-                        + "  Elige índice o -1 para pasar: " + Consola.RESET);
-                try {
-                    opcion = Integer.parseInt(scanner.nextLine().trim());
-                } catch (NumberFormatException e) {
-                    return null;
-                }
-                if (opcion == -1) return null;
+
+                return elegirYJugarCarta(cartaMesa, scanner); // <- mismo método reutilizado
             }
 
-            Carta seleccionada = mano.jugarCarta(opcion);
-
+            Carta seleccionada = mano.getCarta(opcion);
             if (seleccionada == null) {
                 System.out.println(Consola.ROJO + "  Índice inválido. Intenta de nuevo." + Consola.RESET);
                 continue;
             }
-
             if (!seleccionada.esJugableSobre(cartaMesa)) {
-                System.out.println(Consola.ROJO + "  Carta no válida sobre la mesa. Regresa a tu mano." + Consola.RESET);
-                mano.agregarCarta(seleccionada);
+                System.out.println(Consola.ROJO + "  Carta no válida sobre la mesa." + Consola.RESET);
                 continue;
             }
 
+            mano.jugarCarta(opcion);
             if (seleccionada.esComodin()) {
-                String color = pedirColor(scanner);
-                seleccionada.setColorActivo(color);
+                seleccionada.setColorActivo(pedirColor(scanner));
+            }
+            return seleccionada;
+        }
+    }
+
+    private Carta elegirYJugarCarta(Carta cartaMesa, Scanner scanner) {
+        while (true) {
+            System.out.print(Consola.BLANCO + Consola.NEGRITA
+                    + "  Elige índice o -1 para pasar: " + Consola.RESET);
+            int opcion;
+            try {
+                opcion = Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                return null;
             }
 
-            return seleccionada;
+            if (opcion == -1) return null;
+
+            Carta elegida = mano.getCarta(opcion);
+            if (elegida == null) {
+                System.out.println(Consola.ROJO + "  Índice inválido." + Consola.RESET);
+                continue;
+            }
+            if (!elegida.esJugableSobre(cartaMesa)) {
+                System.out.println(Consola.ROJO + "  Esa carta no es jugable sobre la carta de la mesa." + Consola.RESET);
+                continue;
+            }
+
+            mano.jugarCarta(opcion);
+            if (elegida.esComodin()) {
+                elegida.setColorActivo(pedirColor(scanner));
+            }
+            return elegida;
         }
     }
 
