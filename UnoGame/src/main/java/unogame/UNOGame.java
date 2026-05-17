@@ -1,6 +1,8 @@
 package unogame;
 
+import javax.swing.SwingUtilities;
 import unogame.clases.Juego;
+import unogame.ui.VentanaUNO;
 
 /**
  * Clase principal para ejecutar el juego UNO.
@@ -19,7 +21,12 @@ public class UNOGame {
      * @param args Argumentos de línea de comandos (no utilizados).
      */
     public static void main(String[] args) {
-        Juego juego = new Juego();
-        juego.iniciar();
+        if (args.length > 0 && "--consola".equalsIgnoreCase(args[0])) {
+            Juego juego = new Juego();
+            juego.iniciar();
+            return;
+        }
+
+        SwingUtilities.invokeLater(() -> new VentanaUNO().setVisible(true));
     }
 }

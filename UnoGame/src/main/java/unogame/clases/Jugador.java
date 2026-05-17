@@ -93,6 +93,32 @@ public class Jugador {
     }
 
     /**
+     * Decide una jugada de IA sin imprimir animaciones ni mensajes.
+     * Útil para interfaces gráficas que gestionan su propio registro visual.
+     *
+     * @param cartaMesa Carta que está en la mesa.
+     * @param baraja Baraja del juego.
+     * @return Carta jugada por la IA o {@code null} si no hay jugada posible.
+     */
+    public Carta decidirJugadaIASilenciosa(Carta cartaMesa, Baraja baraja) {
+        int indice = mano.primerIndiceValido(cartaMesa);
+
+        if (indice == -1) {
+            robarCarta(baraja);
+            indice = mano.primerIndiceValido(cartaMesa);
+            if (indice == -1) return null;
+        }
+
+        Carta jugada = mano.jugarCarta(indice);
+
+        if (jugada.esComodin()) {
+            jugada.setColorActivo(elegirColorIA());
+        }
+
+        return jugada;
+    }
+
+    /**
      * IA: elige el color más frecuente en la mano.
      *
      * @return Color elegido por la IA.

@@ -181,6 +181,46 @@ public class Consola {
     }
 
     /**
+     * Muestra una transición breve antes de iniciar un turno.
+     *
+     * @param nombre Nombre del jugador que recibe el turno.
+     */
+    public static void animarTurno(String nombre) {
+        String[] marcos = {"◜", "◝", "◞", "◟"};
+        System.out.print(CIAN + NEGRITA);
+        for (int i = 0; i < 8; i++) {
+            System.out.print("\r  " + marcos[i % marcos.length]
+                    + "  Turno de " + nombre + "  "
+                    + marcos[(i + 2) % marcos.length]);
+            System.out.flush();
+            sleep(90);
+        }
+        System.out.println(RESET);
+    }
+
+    /**
+     * Resalta la carta que acaba de jugar un participante.
+     *
+     * @param nombre Nombre del jugador.
+     * @param carta Carta jugada.
+     */
+    public static void animarJugada(String nombre, Carta carta) {
+        String color = colorCarta(carta.esComodin() ? carta.getColorActivo() : carta.getColor());
+        for (int i = 0; i < 2; i++) {
+            System.out.print(color + NEGRITA + "\r  " + nombre + " juega "
+                    + carta.toDisplayString() + RESET);
+            System.out.flush();
+            sleep(180);
+            System.out.print(DIM + "\r  " + nombre + " juega "
+                    + carta.toDisplayString() + RESET);
+            System.out.flush();
+            sleep(120);
+        }
+        System.out.println(color + NEGRITA + "\r  " + nombre + " juega "
+                + carta.toDisplayString() + RESET);
+    }
+
+    /**
      * Muestra animación de victoria para un jugador.
      *
      * @param nombre Nombre del jugador ganador.

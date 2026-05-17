@@ -1,5 +1,7 @@
 package unogame.clases;
 
+import java.util.function.Consumer;
+
 /**
  * Clase encargada de aplicar los efectos de las cartas especiales
  * durante el juego. Interactúa con el {@link TurnoManager} para
@@ -24,6 +26,8 @@ public class EfectoCarta {
     private TurnoManager turnoManager;
     /** Baraja de cartas utilizada en el juego. */
     private Baraja       baraja;
+    /** Receptor opcional de eventos para interfaces que no usan consola. */
+    private Consumer<String> notificador;
 
     /**
      * Constructor de la clase EfectoCarta.
@@ -32,8 +36,21 @@ public class EfectoCarta {
      * @param baraja Baraja de cartas del juego.
      */
     public EfectoCarta(TurnoManager turnoManager, Baraja baraja) {
+        this(turnoManager, baraja, null);
+    }
+
+    /**
+     * Constructor alternativo para interfaces que no dependen de la consola.
+     *
+     * @param turnoManager Administrador de turnos.
+     * @param baraja Baraja de cartas del juego.
+     * @param notificador Receptor opcional de mensajes de efectos.
+     */
+    public EfectoCarta(TurnoManager turnoManager, Baraja baraja,
+                       Consumer<String> notificador) {
         this.turnoManager = turnoManager;
         this.baraja       = baraja;
+        this.notificador  = notificador;
     }
 
     /**
@@ -85,8 +102,12 @@ public class EfectoCarta {
      * @param saltado Jugador que pierde el turno.
      */
     protected void notificarSalto(Jugador saltado) {
-        Consola.animarEfecto("SALTO  " + saltado.getNombre()
-                + " pierde turno", Consola.AMARILLO);
+        if (notificador != null) {
+            notificador.accept("SALTO: " + saltado.getNombre() + " pierde turno.");
+        } else {
+            Consola.animarEfecto("SALTO  " + saltado.getNombre()
+                    + " pierde turno", Consola.AMARILLO);
+        }
     }
 
     /**
@@ -94,8 +115,13 @@ public class EfectoCarta {
      * @param nuevaDireccion Nueva dirección del turno (1 → derecha, -1 → izquierda).
      */
     protected void notificarReversa(int nuevaDireccion) {
-        Consola.animarEfecto("REVERSA  Dirección "
-                + (nuevaDireccion == 1 ? "→" : "←"), Consola.CIAN);
+        if (notificador != null) {
+            notificador.accept("REVERSA: dirección "
+                    + (nuevaDireccion == 1 ? "horaria." : "inversa."));
+        } else {
+            Consola.animarEfecto("REVERSA  Dirección "
+                    + (nuevaDireccion == 1 ? "→" : "←"), Consola.CIAN);
+        }
     }
 
     /**
@@ -103,9 +129,14 @@ public class EfectoCarta {
      * @param afectado Jugador que roba dos cartas.
      */
     protected void notificarRobaDos(Jugador afectado) {
-        Consola.animarRobando(afectado.getNombre(), 2);
-        Consola.animarEfecto("ROBA 2  " + afectado.getNombre()
-                + " roba 2 y pierde turno", Consola.ROJO);
+        if (notificador != null) {
+            notificador.accept("ROBA 2: " + afectado.getNombre()
+                    + " roba 2 cartas y pierde turno.");
+        } else {
+            Consola.animarRobando(afectado.getNombre(), 2);
+            Consola.animarEfecto("ROBA 2  " + afectado.getNombre()
+                    + " roba 2 y pierde turno", Consola.ROJO);
+        }
     }
 
     /**
@@ -114,11 +145,17 @@ public class EfectoCarta {
      * @param colorActivo Color activo elegido por el jugador.
      */
     protected void notificarRobaCuatro(Jugador afectado, String colorActivo) {
-        Consola.animarRobando(afectado.getNombre(), 4);
-        Consola.animarEfecto("ROBA 4  " + afectado.getNombre()
-                + " roba 4 y pierde turno", Consola.ROJO);
-        System.out.println(Consola.MAGENTA + Consola.NEGRITA
-                + "  Color activo: " + colorActivo.toUpperCase() + Consola.RESET);
+        if (notificador != null) {
+            notificador.accept("ROBA 4: " + afectado.getNombre()
+                    + " roba 4 cartas y pierde turno.");
+            notificador.accept("Color activo: " + colorActivo.toUpperCase() + ".");
+        } else {
+            Consola.animarRobando(afectado.getNombre(), 4);
+            Consola.animarEfecto("ROBA 4  " + afectado.getNombre()
+                    + " roba 4 y pierde turno", Consola.ROJO);
+            System.out.println(Consola.MAGENTA + Consola.NEGRITA
+                    + "  Color activo: " + colorActivo.toUpperCase() + Consola.RESET);
+        }
     }
 
     /**
@@ -126,7 +163,12 @@ public class EfectoCarta {
      * @param colorActivo Color activo elegido por el jugador.
      */
     protected void notificarComodin(String colorActivo) {
-        Consola.animarEfecto("COMODIN  Color activo: "
-                + colorActivo.toUpperCase(), Consola.MAGENTA);
+        if (notificador != null) {
+            notificador.accept("COMODÍN: color activo "
+                    + colorActivo.toUpperCase() + ".");
+        } else {
+            Consola.animarEfecto("COMODIN  Color activo: "
+                    + colorActivo.toUpperCase(), Consola.MAGENTA);
+        }
     }
 }
