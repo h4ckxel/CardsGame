@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayDeque;
 import java.util.Queue;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -22,6 +23,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+
 import unogame.clases.Carta;
 import unogame.clases.Juego;
 import unogame.clases.Jugador;
@@ -188,26 +190,36 @@ public class UnoGUI extends JPanel {
     }
 
     private void actualizarMano() {
-        mano.removeAll();
+    mano.removeAll();
 
-        Jugador humano = juego.getJugadorHumano();
-        boolean esTurnoHumano = !juego.isPartidaTerminada()
-                && !juego.esTurnoIA()
-                && !iaEnCurso
-                && !juego.debeRobarCartaHumano();
+    Jugador humano = juego.getJugadorHumano();
 
-        for (int i = 0; i < humano.getMano().size(); i++) {
-            final int indice = i;
-            Carta carta = humano.getMano().getCarta(i);
-            JButton boton = crearBotonCarta(carta);
-            boton.setEnabled(esTurnoHumano && carta.esJugableSobre(juego.getCartaMesa()));
+    boolean esTurnoHumano = !juego.isPartidaTerminada()
+            && !juego.esTurnoIA()
+            && !iaEnCurso
+            && !juego.debeRobarCartaHumano();
+
+    for (int i = 0; i < humano.getMano().size(); i++) {
+
+        final int indice = i;
+        Carta carta = humano.getMano().getCarta(i);
+
+        JButton boton = crearBotonCarta(carta);
+
+        boolean jugable = carta.esJugableSobre(juego.getCartaMesa());
+
+        boton.setEnabled(true);
+
+        if (jugable && esTurnoHumano) {
             boton.addActionListener(e -> jugarCarta(indice));
-            mano.add(boton);
         }
 
-        mano.revalidate();
-        mano.repaint();
+        mano.add(boton);
     }
+
+    mano.revalidate();
+    mano.repaint();
+}
 
     private JButton crearBotonCarta(Carta carta) {
         ImageIcon icono = CartaImagenes.obtener(carta);
