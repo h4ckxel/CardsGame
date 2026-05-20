@@ -16,9 +16,9 @@ Los binarios ejecutables estan publicados en `dist/`.
 | Version | Rama origen | Interfaz | Descarga |
 | --- | --- | --- | --- |
 | V1 | `Acxel` | Consola | [CardsGame-V1-console.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V1-console.jar) |
-| V2 | `UNOGame_v4` | Consola | [CardsGame-V2-console.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V2-console.jar) |
+| V2 | `Acxel` | Consola | [CardsGame-V2-console.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V2-console.jar) |
 | V3 | `main` | Swing | [CardsGame-V3-gui.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V3-gui.jar) |
-| V3.1 | `UnoGame.zip` | Swing | [CardsGame-V3.1-gui.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V3.1-gui.jar) |
+| V3.1 | `main` | Swing | [CardsGame-V3.1-gui.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V3.1-gui.jar) |
 
 ## Ejecucion
 
@@ -44,10 +44,6 @@ V3 y V3.1 tambien pueden ejecutarse en modo consola:
 java -jar CardsGame-V3-gui.jar --consola
 java -jar CardsGame-V3.1-gui.jar --consola
 ```
-
-## Descripcion tecnica
-
-El proyecto modela el flujo basico de una partida de UNO mediante clases de dominio para cartas, baraja, mano, jugadores y motor de juego. Las versiones V2 y V3 separan mejor las responsabilidades del registro de jugadores, control de turnos, efectos de cartas y salida por consola. La version V3 agrega una capa Swing y recursos graficos para representar las cartas.
 
 ## Estructura principal
 
