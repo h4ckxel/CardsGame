@@ -3,10 +3,9 @@
 <p align="center">
 
   <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Versión-2.0-red?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/Estado-En%20Desarrollo-yellow?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Proyecto-Universitario-blue?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Licencia-MIT-green?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Estado%20Terminado-yellow?style=for-the-badge"/>
 </p>
 
 ## Descargas
