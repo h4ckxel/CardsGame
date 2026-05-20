@@ -14,8 +14,8 @@ Los binarios ejecutables estan publicados en `dist/`.
 
 | Version | Rama origen | Interfaz | Descarga |
 | --- | --- | --- | --- |
-| V1 | `Acxel` | Consola | [CardsGame-V1-console.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V1-console.jar) |
-| V2 | `Acxel` | Consola | [CardsGame-V2-console.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V2-console.jar) |
+| V1 | `main` | Consola | [CardsGame-V1-console.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V1-console.jar) |
+| V2 | `main` | Consola | [CardsGame-V2-console.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V2-console.jar) |
 | V3 | `main` | Swing | [CardsGame-V3-gui.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V3-gui.jar) |
 | V3.1 | `main` | Swing | [CardsGame-V3.1-gui.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V3.1-gui.jar) |
 
