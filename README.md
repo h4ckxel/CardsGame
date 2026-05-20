@@ -18,6 +18,7 @@ Los binarios ejecutables estan publicados en `dist/`.
 | V1 | `Acxel` | Consola | [CardsGame-V1-console.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V1-console.jar) |
 | V2 | `UNOGame_v4` | Consola | [CardsGame-V2-console.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V2-console.jar) |
 | V3 | `main` | Swing | [CardsGame-V3-gui.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V3-gui.jar) |
+| V3.1 | `UnoGame.zip` | Swing | [CardsGame-V3.1-gui.jar](https://github.com/h4ckxel/CardsGame/raw/main/dist/CardsGame-V3.1-gui.jar) |
 
 ## Ejecucion
 
@@ -30,16 +31,18 @@ java -jar CardsGame-V1-console.jar
 java -jar CardsGame-V2-console.jar
 ```
 
-V3 abre la interfaz grafica por defecto:
+V3 y V3.1 abren la interfaz grafica por defecto:
 
 ```bash
 java -jar CardsGame-V3-gui.jar
+java -jar CardsGame-V3.1-gui.jar
 ```
 
-V3 tambien puede ejecutarse en modo consola:
+V3 y V3.1 tambien pueden ejecutarse en modo consola:
 
 ```bash
 java -jar CardsGame-V3-gui.jar --consola
+java -jar CardsGame-V3.1-gui.jar --consola
 ```
 
 ## Descripcion tecnica
@@ -59,6 +62,7 @@ dist/
   CardsGame-V1-console.jar
   CardsGame-V2-console.jar
   CardsGame-V3-gui.jar
+  CardsGame-V3.1-gui.jar
 ```
 
 ## Autores
