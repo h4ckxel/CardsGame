@@ -1,6 +1,13 @@
 # CardsGame
 
-CardsGame es una implementacion de UNO en Java. El repositorio conserva tres versiones del proyecto: una version inicial de consola, una version de consola refactorizada y una version actual con interfaz grafica Swing.
+<p align="center">
+
+  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Versión-2.0-red?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Estado-En%20Desarrollo-yellow?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Proyecto-Universitario-blue?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Licencia-MIT-green?style=for-the-badge"/>
+</p>
 
 ## Descargas
 
